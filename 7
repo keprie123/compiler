@@ -1,0 +1,37 @@
+//if it fail run this in ubuntu
+cat << 'EOF' > q7.y
+%{
+#include <stdio.h>
+#include <stdlib.h>
+
+int yylex(void);
+void yyerror(const char *s);
+%}
+
+%%
+stmt: S '\n' {
+        printf("Valid string for a^n b^n (n >= 0)\n");
+        printf("Number of a = %d and number of b = %d\n", $1, $1);
+        exit(0);
+    }
+    ;
+
+S   : 'a' S 'b' { $$ = $2 + 1; }
+    | /* empty */ { $$ = 0; }
+    ;
+%%
+
+void yyerror(const char *s) {
+    printf("Invalid string: does not match a^n b^n\n");
+    exit(0);
+}
+
+int main(void) {
+    printf("Enter string to test: ");
+    yyparse();
+    return 0;
+}
+EOF
+bison -y -o q7yacc.c q7.y
+gcc q7lex.c q7yacc.c -o q7
+./q7
