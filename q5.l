@@ -1,10 +1,10 @@
 /* 5.	Write a Lex program that accurately groups numeric constants into standard
  signed/unsigned Integers or Floating-Point fractions
-lex -o q5lex.c q5.l
+flex -o q5lex.c q5.l
 gcc q5lex.c -o q5
  ./q5
 
- lex -o q5lex.c q5.l && gcc q5lex.c -o q5
+ flex -o q5lex.c q5.l && gcc q5lex.c -o q5
 Enter numbers separated by space (Ctrl+D to exit):
 10 -25 45 3.14
 Signed/Standard Integer : 10
